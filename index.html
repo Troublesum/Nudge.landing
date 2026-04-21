@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>nudge — meet real people nearby</title>
+  <meta name="description" content="A safe, warm, effortless way to meet real people nearby. Coming soon."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cobalt:       #2B5CE6;
+      --cobalt-soft:  #6B96F5;
+      --cobalt-tint:  #EDF0FA;
+      --bg:           #F6F8FF;
+      --charcoal:     #2D2D3A;
+      --amber:        #F5A623;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--charcoal);
+      font-family: 'Inter', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.18;
+      pointer-events: none;
+    }
+    .orb-1 { width: 480px; height: 480px; background: var(--cobalt); top: -120px; right: -100px; animation: drift 12s ease-in-out infinite alternate; }
+    .orb-2 { width: 320px; height: 320px; background: var(--amber); bottom: -80px; left: -60px; animation: drift 16s ease-in-out infinite alternate-reverse; }
+    .orb-3 { width: 200px; height: 200px; background: var(--cobalt-soft); top: 40%; left: 10%; animation: drift 10s ease-in-out infinite alternate; }
+    @keyframes drift {
+      from { transform: translate(0, 0); }
+      to   { transform: translate(30px, 20px); }
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 480px;
+      width: 100%;
+    }
+
+    .logo-wrap {
+      margin-bottom: 40px;
+      animation: fadeUp 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+    .logo-wrap svg {
+      width: 190px;
+      height: auto;
+      /* Strip the background rect — page bg handles it */
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--cobalt-tint);
+      color: var(--cobalt);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 28px;
+      animation: fadeUp 0.7s 0s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+    .badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--amber);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .headline {
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 600;
+      color: var(--charcoal);
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+      animation: fadeUp 0.7s 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+    .headline em { font-style: normal; color: var(--cobalt); }
+
+    .subline {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--charcoal);
+      opacity: 0.55;
+      line-height: 1.6;
+      margin-bottom: 48px;
+      animation: fadeUp 0.7s 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+
+    .form-wrap { width: 100%; animation: fadeUp 0.7s 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
+    .form { display: flex; gap: 10px; width: 100%; }
+    .input {
+      flex: 1;
+      height: 52px;
+      padding: 0 18px;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 15px;
+      color: var(--charcoal);
+      background: #fff;
+      border: 1.5px solid #DDE3F5;
+      border-radius: 14px;
+      outline: none;
+      transition: border-color 200ms ease, box-shadow 200ms ease;
+    }
+    .input::placeholder { color: #A0AABF; }
+    .input:focus { border-color: var(--cobalt); box-shadow: 0 0 0 3px rgba(43,92,230,0.12); }
+    .btn {
+      height: 52px;
+      padding: 0 24px;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      color: #fff;
+      background: var(--cobalt);
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: transform 120ms ease, background 200ms ease;
+    }
+    .btn:hover { background: #2350d0; }
+    .btn:active { transform: scale(0.97); }
+
+    .success {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--cobalt-tint);
+      color: var(--cobalt);
+      font-size: 15px;
+      font-weight: 500;
+      padding: 14px 20px;
+      border-radius: 14px;
+      width: 100%;
+    }
+    .success.show { display: flex; animation: fadeUp 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
+    .success-icon {
+      width: 20px; height: 20px;
+      background: var(--cobalt);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .note {
+      margin-top: 20px;
+      font-size: 12px;
+      color: var(--charcoal);
+      opacity: 0.35;
+      animation: fadeUp 0.7s 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+
+    .pins { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    .pin { position: absolute; opacity: 0; animation: pinAppear 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+    .pin-1  { top: 12%; left: 8%;   animation-delay: 0.8s; }
+    .pin-2  { top: 18%; right: 12%; animation-delay: 1.1s; }
+    .pin-3  { top: 62%; left: 5%;   animation-delay: 1.4s; }
+    .pin-4  { top: 70%; right: 8%;  animation-delay: 1.0s; }
+    .pin-5  { top: 38%; left: 3%;   animation-delay: 1.6s; }
+    .pin-6  { top: 45%; right: 4%;  animation-delay: 1.2s; }
+    @keyframes pinAppear {
+      from { opacity: 0; transform: scale(0) translateY(8px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 480px) {
+      .form { flex-direction: column; }
+      .btn  { border-radius: 14px; }
+      .pin-1, .pin-3, .pin-5 { display: none; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <div class="pins">
+    <div class="pin pin-1"><svg width="24" height="32" viewBox="0 0 24 32" fill="none"><path d="M12 32 C12 32 1 19 1 11 C1 5 6 1 12 1 C18 1 23 5 23 11 C23 19 12 32 12 32Z" fill="#2B5CE6" opacity="0.35"/></svg></div>
+    <div class="pin pin-2"><svg width="24" height="32" viewBox="0 0 24 32" fill="none"><path d="M12 32 C12 32 1 19 1 11 C1 5 6 1 12 1 C18 1 23 5 23 11 C23 19 12 32 12 32Z" fill="#F5A623" opacity="0.4"/></svg></div>
+    <div class="pin pin-3"><svg width="20" height="27" viewBox="0 0 24 32" fill="none"><path d="M12 32 C12 32 1 19 1 11 C1 5 6 1 12 1 C18 1 23 5 23 11 C23 19 12 32 12 32Z" fill="#6B96F5" opacity="0.35"/></svg></div>
+    <div class="pin pin-4"><svg width="22" height="29" viewBox="0 0 24 32" fill="none"><path d="M12 32 C12 32 1 19 1 11 C1 5 6 1 12 1 C18 1 23 5 23 11 C23 19 12 32 12 32Z" fill="#2B5CE6" opacity="0.3"/></svg></div>
+    <div class="pin pin-5"><svg width="18" height="24" viewBox="0 0 24 32" fill="none"><path d="M12 32 C12 32 1 19 1 11 C1 5 6 1 12 1 C18 1 23 5 23 11 C23 19 12 32 12 32Z" fill="#F5A623" opacity="0.3"/></svg></div>
+    <div class="pin pin-6"><svg width="20" height="27" viewBox="0 0 24 32" fill="none"><path d="M12 32 C12 32 1 19 1 11 C1 5 6 1 12 1 C18 1 23 5 23 11 C23 19 12 32 12 32Z" fill="#6B96F5" opacity="0.4"/></svg></div>
+  </div>
+
+  <div class="content">
+
+    <div class="badge">
+      <span class="badge-dot"></span>
+      Coming soon
+    </div>
+
+    <div class="logo-wrap">
+      <svg width="190" height="83" viewBox="0 0 190 83" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M64.2184 40.4386C64.2184 40.4386 48.8816 47.3771 46.0289 54.4107C43.8894 59.6858 47.0705 64.7075 53.5209 66.8144C59.9713 68.9212 66.0051 66.9094 68.1446 61.6343C70.9973 54.6007 64.2184 40.4386 64.2184 40.4386Z" fill="#2B5CE6"/>
+        <path opacity="0.85" d="M63.7815 40.7921C63.7815 40.7921 57.0027 26.63 59.8553 19.5965C61.9948 14.3214 68.0286 12.3095 74.479 14.4164C80.9294 16.5233 84.1106 21.545 81.9711 26.8201C79.1184 33.8536 63.7815 40.7921 63.7815 40.7921Z" fill="#2B5CE6"/>
+        <path d="M16.8523 44.3409V62H8.38068V31.4545H16.4545V36.8438H16.8125C17.4886 35.0672 18.6222 33.6619 20.2131 32.6278C21.804 31.5805 23.733 31.0568 26 31.0568C28.1212 31.0568 29.9706 31.5208 31.5483 32.4489C33.1259 33.3769 34.3523 34.7027 35.2273 36.4261C36.1023 38.1364 36.5398 40.178 36.5398 42.5511V62H28.0682V44.0625C28.0814 42.1932 27.6042 40.7348 26.6364 39.6875C25.6686 38.6269 24.3362 38.0966 22.6392 38.0966C21.4991 38.0966 20.4915 38.3419 19.6165 38.8324C18.7547 39.3229 18.0786 40.0388 17.5881 40.9801C17.1108 41.9081 16.8655 43.0284 16.8523 44.3409Z" fill="#2D2D3A"/>
+        <path d="M96.6364 62.4972C94.3163 62.4972 92.215 61.9006 90.3324 60.7074C88.4631 59.5009 86.9782 57.7311 85.8778 55.3977C84.7907 53.0511 84.2472 50.1742 84.2472 46.767C84.2472 43.267 84.8106 40.357 85.9375 38.0369C87.0644 35.7036 88.5625 33.9602 90.4318 32.8068C92.3144 31.6402 94.3759 31.0568 96.6165 31.0568C98.3267 31.0568 99.7519 31.3485 100.892 31.9318C102.045 32.5019 102.973 33.2178 103.676 34.0795C104.392 34.928 104.936 35.7633 105.307 36.5852H105.565V21.2727H114.017V62H105.665V57.108H105.307C104.909 57.9564 104.346 58.7983 103.616 59.6335C102.901 60.4555 101.966 61.1383 100.812 61.6818C99.6723 62.2254 98.2803 62.4972 96.6364 62.4972ZM99.321 55.7557C100.687 55.7557 101.84 55.3845 102.781 54.642C103.736 53.8864 104.465 52.8324 104.969 51.4801C105.486 50.1278 105.744 48.5436 105.744 46.7273C105.744 44.911 105.492 43.3333 104.989 41.9943C104.485 40.6553 103.756 39.6212 102.801 38.892C101.847 38.1629 100.687 37.7983 99.321 37.7983C97.929 37.7983 96.7557 38.1761 95.8011 38.9318C94.8466 39.6875 94.1241 40.7348 93.6335 42.0739C93.143 43.4129 92.8977 44.964 92.8977 46.7273C92.8977 48.5038 93.143 50.0748 93.6335 51.4403C94.1373 52.7926 94.8598 53.8532 95.8011 54.6222C96.7557 55.3778 97.929 55.7557 99.321 55.7557ZM134.744 74.0909C131.999 74.0909 129.646 73.7131 127.684 72.9574C125.735 72.215 124.184 71.2008 123.031 69.9148C121.877 68.6288 121.128 67.1837 120.783 65.5795L128.619 64.5256C128.857 65.1354 129.235 65.7055 129.752 66.2358C130.269 66.7661 130.952 67.1903 131.8 67.5085C132.662 67.84 133.71 68.0057 134.942 68.0057C136.785 68.0057 138.303 67.5549 139.496 66.6534C140.703 65.7652 141.306 64.2737 141.306 62.179V56.5909H140.948C140.577 57.4394 140.02 58.2415 139.278 58.9972C138.535 59.7528 137.581 60.3693 136.414 60.8466C135.247 61.3239 133.855 61.5625 132.238 61.5625C129.944 61.5625 127.856 61.0322 125.974 59.9716C124.104 58.8977 122.613 57.2604 121.499 55.0597C120.399 52.8456 119.849 50.0483 119.849 46.6676C119.849 43.2074 120.412 40.3172 121.539 37.9972C122.666 35.6771 124.164 33.9403 126.033 32.7869C127.916 31.6335 129.978 31.0568 132.218 31.0568C133.928 31.0568 135.36 31.3485 136.513 31.9318C137.667 32.5019 138.595 33.2178 139.298 34.0795C140.013 34.928 140.564 35.7633 140.948 36.5852H141.266V31.4545H149.678V62.2983C149.678 64.8968 149.042 67.071 147.769 68.821C146.496 70.571 144.733 71.8835 142.479 72.7585C140.239 73.6468 137.66 74.0909 134.744 74.0909ZM134.923 55.1989C136.288 55.1989 137.442 54.8608 138.383 54.1847C139.337 53.4953 140.067 52.5142 140.57 51.2415C141.087 49.9555 141.346 48.4176 141.346 46.6278C141.346 44.8381 141.094 43.2869 140.59 41.9744C140.086 40.6487 139.357 39.6212 138.403 38.892C137.448 38.1629 136.288 37.7983 134.923 37.7983C133.531 37.7983 132.357 38.1761 131.403 38.9318C130.448 39.6742 129.726 40.7083 129.235 42.0341C128.745 43.3598 128.499 44.8911 128.499 46.6278C128.499 48.3911 128.745 49.9157 129.235 51.2017C129.739 52.4744 130.461 53.4621 131.403 54.1648C132.357 54.8542 133.531 55.1989 134.923 55.1989ZM170.34 62.5966C167.198 62.5966 164.494 61.9602 162.227 60.6875C159.973 59.4015 158.236 57.5852 157.016 55.2386C155.797 52.8788 155.187 50.0881 155.187 46.8665C155.187 43.7244 155.797 40.9669 157.016 38.5938C158.236 36.2206 159.953 34.3712 162.167 33.0455C164.394 31.7197 167.006 31.0568 170.002 31.0568C172.017 31.0568 173.893 31.3816 175.63 32.0312C177.38 32.6676 178.905 33.6288 180.204 34.9148C181.516 36.2008 182.537 37.8182 183.266 39.767C183.996 41.7027 184.36 43.9697 184.36 46.5682V48.8949H158.567V43.6449H176.386C176.386 42.4252 176.121 41.3447 175.59 40.4034C175.06 39.4621 174.324 38.7263 173.383 38.196C172.455 37.6525 171.374 37.3807 170.141 37.3807C168.855 37.3807 167.715 37.679 166.721 38.2756C165.74 38.8589 164.971 39.6477 164.414 40.642C163.857 41.6231 163.572 42.7169 163.559 43.9233V48.9148C163.559 50.4261 163.837 51.732 164.394 52.8324C164.964 53.9328 165.766 54.7812 166.8 55.3778C167.835 55.9744 169.061 56.2727 170.479 56.2727C171.421 56.2727 172.282 56.1402 173.065 55.875C173.847 55.6098 174.516 55.2121 175.073 54.6818C175.63 54.1515 176.054 53.5019 176.346 52.733L184.181 53.25C183.783 55.1326 182.968 56.7765 181.735 58.1818C180.515 59.5739 178.938 60.661 177.002 61.4432C175.08 62.2121 172.859 62.5966 170.34 62.5966Z" fill="#2D2D3A"/>
+      </svg>
+    </div>
+
+    <h1 class="headline">Meet <em>real</em> people<br/>nearby.</h1>
+    <p class="subline">A safe, warm way to connect with verified people around you — whatever happens from there is up to you.</p>
+
+    <div class="form-wrap">
+      <div class="form" id="form">
+        <input class="input" type="email" id="email" placeholder="Your email address" autocomplete="email"/>
+        <button class="btn" onclick="handleSubmit()">Notify me</button>
+      </div>
+      <div class="success" id="success">
+        <div class="success-icon">
+          <svg viewBox="0 0 11 9" fill="none" width="11" height="9"><path d="M1 4.5L4 7.5L10 1.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        You're on the list — we'll be in touch.
+      </div>
+    </div>
+
+    <p class="note">No spam, ever. Just a nudge when we're ready.</p>
+
+  </div>
+</div>
+
+<script>
+  function handleSubmit() {
+    const email = document.getElementById('email').value;
+    if (!email || !email.includes('@')) {
+      const input = document.getElementById('email');
+      input.focus();
+      input.style.borderColor = '#E55';
+      setTimeout(() => input.style.borderColor = '', 1000);
+      return;
+    }
+    document.getElementById('form').style.display = 'none';
+    document.getElementById('success').classList.add('show');
+  }
+  document.getElementById('email').addEventListener('keydown', e => {
+    if (e.key === 'Enter') handleSubmit();
+  });
+</script>
+</body>
+</html>
