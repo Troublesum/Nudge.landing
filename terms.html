@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Terms of Service — nudge</title>
+  <meta name="description" content="Terms of Service for the nudge app, operated by Motion Interactive Limited."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cobalt:      #2B5CE6;
+      --cobalt-soft: #6B96F5;
+      --cobalt-tint: #EDF0FA;
+      --bg:          #F6F8FF;
+      --charcoal:    #2D2D3A;
+      --amber:       #F5A623;
+      --border:      #DDE3F5;
+      --text-muted:  rgba(45,45,58,0.5);
+    }
+
+    html, body {
+      background: var(--bg);
+      color: var(--charcoal);
+      font-family: 'Inter', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.7;
+    }
+
+    /* ── Top nav ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(246,248,255,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    .nav-wordmark {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--cobalt);
+      letter-spacing: -0.03em;
+    }
+    .nav-back {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--cobalt);
+      text-decoration: none;
+      opacity: 0.7;
+      transition: opacity 200ms;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .nav-back:hover { opacity: 1; }
+
+    /* ── Page shell ── */
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 56px 24px 96px;
+    }
+
+    /* ── Header ── */
+    .doc-header {
+      margin-bottom: 48px;
+      padding-bottom: 32px;
+      border-bottom: 2px solid var(--cobalt-tint);
+    }
+    .doc-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--cobalt-tint);
+      color: var(--cobalt);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+    }
+    .doc-title {
+      font-size: clamp(28px, 4vw, 38px);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      color: var(--charcoal);
+      margin-bottom: 12px;
+    }
+    .doc-meta {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* ── Body content ── */
+    .doc-body h2 {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--charcoal);
+      margin: 48px 0 14px;
+      padding-top: 8px;
+    }
+    .doc-body p {
+      font-size: 15px;
+      color: var(--charcoal);
+      opacity: 0.8;
+      margin-bottom: 14px;
+    }
+    .doc-body ul {
+      margin: 0 0 16px 0;
+      padding-left: 20px;
+    }
+    .doc-body li {
+      font-size: 15px;
+      color: var(--charcoal);
+      opacity: 0.8;
+      margin-bottom: 6px;
+    }
+    .doc-body a {
+      color: var(--cobalt);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(43,92,230,0.25);
+      transition: border-color 150ms;
+    }
+    .doc-body a:hover { border-color: var(--cobalt); }
+
+    /* Section divider */
+    .doc-body h2:not(:first-child) {
+      border-top: 1px solid var(--border);
+      padding-top: 40px;
+      margin-top: 40px;
+    }
+
+    /* ── Contact box ── */
+    .contact-box {
+      margin-top: 48px;
+      background: var(--cobalt-tint);
+      border-radius: 16px;
+      padding: 24px 28px;
+    }
+    .contact-box p {
+      font-size: 15px;
+      opacity: 0.85;
+      margin-bottom: 6px;
+    }
+    .contact-box p:last-child { margin-bottom: 0; }
+    .contact-box a {
+      color: var(--cobalt);
+      font-weight: 500;
+      text-decoration: none;
+    }
+    .contact-box a:hover { text-decoration: underline; }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      text-align: center;
+    }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+    .footer-link {
+      font-size: 13px;
+      color: var(--cobalt);
+      opacity: 0.6;
+      text-decoration: none;
+      transition: opacity 200ms;
+    }
+    .footer-link:hover { opacity: 1; }
+    .footer-copy {
+      font-size: 12px;
+      color: var(--charcoal);
+      opacity: 0.35;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="/">
+    <svg width="20" height="20" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M55.5 55.5 C55.5 55.5 42 49 39.5 42 C37.5 36.5 41.5 31 48 33 C54.5 35 57.5 41 55.5 55.5Z" fill="#2B5CE6"/>
+      <path opacity="0.8" d="M55 55 C55 55 48 41.5 50.5 34.5 C52.5 29 59 27 65.5 29 C72 31 75 36.5 73 42 C70.5 49 55 55 55 55Z" fill="#2B5CE6"/>
+    </svg>
+    <span class="nav-wordmark">nudge</span>
+  </a>
+  <a class="nav-back" href="/">
+    ← Back
+  </a>
+</nav>
+
+<main class="page">
+  <header class="doc-header">
+    <div class="doc-label">Legal</div>
+    <h1 class="doc-title">Terms of Service</h1>
+    <p class="doc-meta">Effective date: 3 June 2025 · Motion Interactive Limited</p>
+  </header>
+
+  <div class="doc-body">
+
+    <p>These Terms of Service ("Terms") govern your use of the nudge mobile application and website nudgeme.live, operated by Motion Interactive Limited ("we", "us", "our").</p>
+    <p>By creating an account or using nudge you agree to these Terms. If you do not agree, do not use the app.</p>
+
+    <h2>1. Eligibility</h2>
+    <p>You must be at least 18 years old to use nudge. By creating an account you confirm that you are 18 or over. We reserve the right to terminate accounts where we have reason to believe this requirement is not met.</p>
+
+    <h2>2. Your account</h2>
+    <p>You are responsible for maintaining the security of your account credentials. You must not share your account with another person. You are responsible for all activity that occurs under your account.</p>
+    <p>You must provide accurate information during registration. Impersonating another person or creating a false identity is prohibited.</p>
+
+    <h2>3. Identity verification</h2>
+    <p>nudge requires identity verification to access core features including appearing on the map, creating events, and messaging other users. Verification is a one-time process handled by Stripe Identity. The verification fee is non-refundable once the verification process has been initiated.</p>
+    <p>Attempting to verify with fraudulent documents or circumvent the verification process will result in permanent account termination.</p>
+
+    <h2>4. Acceptable use</h2>
+    <p>You agree not to use nudge to:</p>
+    <ul>
+      <li>Harass, threaten, or harm other users</li>
+      <li>Post false, misleading, or fraudulent information</li>
+      <li>Impersonate any person or entity</li>
+      <li>Send unsolicited messages or spam</li>
+      <li>Engage in any unlawful activity</li>
+      <li>Scrape, crawl, or extract data from the app by automated means</li>
+      <li>Attempt to gain unauthorised access to our systems or another user's account</li>
+      <li>Use the app in any way that could damage, disable, or impair our infrastructure</li>
+    </ul>
+    <p>We reserve the right to remove content and suspend or terminate accounts that violate these rules, at our sole discretion.</p>
+
+    <h2>5. Events and meetups</h2>
+    <p>nudge enables users to create and attend events. You are solely responsible for any event you create, including its accuracy, legality, and safety. We do not vet, endorse, or take responsibility for user-created events.</p>
+    <p>You attend events at your own risk. We strongly recommend using the Trusted Contact feature for meetups with new people.</p>
+    <p>Creating events with false information, misleading descriptions, or for the purpose of luring other users is strictly prohibited and will result in account termination.</p>
+
+    <h2>6. nudge Plus subscription</h2>
+    <p>nudge Plus is a paid subscription offering additional features. Subscriptions are billed monthly or annually and are managed through your device's app store (Apple App Store or Google Play Store) via RevenueCat.</p>
+    <ul>
+      <li>Subscription fees are charged in advance for each billing period</li>
+      <li>You can cancel at any time; cancellation takes effect at the end of the current billing period</li>
+      <li>Refunds are subject to Apple's or Google's refund policies — we cannot issue refunds for in-app purchases directly</li>
+      <li>We reserve the right to change subscription pricing with reasonable notice</li>
+    </ul>
+
+    <h2>7. Virtual currency (coins)</h2>
+    <p>nudge includes a virtual coin system. Coins are earned through in-app activity and can be spent on cosmetic items in the nudge store. Coins have no monetary value and cannot be exchanged for real money. We reserve the right to modify, suspend, or discontinue the coin system at any time.</p>
+
+    <h2>8. User content</h2>
+    <p>You retain ownership of content you post on nudge (photos, event descriptions, messages). By posting content you grant us a non-exclusive, worldwide, royalty-free licence to display and use that content to operate the service.</p>
+    <p>You must not post content that is unlawful, harmful, offensive, or infringes the rights of others. We may remove content that violates these Terms without notice.</p>
+
+    <h2>9. Location data</h2>
+    <p>nudge is a location-based service. By using the app you consent to the collection and use of your location data as described in our <a href="/privacy">Privacy Policy</a>. You can control your location visibility at any time using the Ghost Mode feature or your device's location settings.</p>
+
+    <h2>10. Safety</h2>
+    <p>Your safety is important to us. nudge provides features including identity verification, Ghost Mode, and Trusted Contacts to help you stay safe. However:</p>
+    <ul>
+      <li>We cannot guarantee the identity or intentions of other users beyond the verification result</li>
+      <li>You are responsible for your own safety when meeting people you have connected with through the app</li>
+      <li>Always meet in public places and tell someone where you are going</li>
+    </ul>
+    <p>If you feel unsafe or encounter behaviour that violates these Terms, please report it through the app.</p>
+
+    <h2>11. Intellectual property</h2>
+    <p>The nudge app, including its design, logos, brand, and underlying technology, is owned by Motion Interactive Limited. You may not copy, reproduce, modify, or distribute any part of the app without our written permission.</p>
+
+    <h2>12. Disclaimers</h2>
+    <p>nudge is provided "as is" and "as available". We do not warrant that the service will be uninterrupted, error-free, or free of harmful components. We are not responsible for the actions of other users.</p>
+
+    <h2>13. Limitation of liability</h2>
+    <p>To the fullest extent permitted by law, Motion Interactive Limited shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of nudge. Our total liability to you shall not exceed the amount you have paid us in the 12 months preceding the claim.</p>
+    <p>Nothing in these Terms limits liability for death or personal injury caused by negligence, fraud, or any other liability that cannot be excluded under English law.</p>
+
+    <h2>14. Termination</h2>
+    <p>We may suspend or terminate your account at any time if you breach these Terms, or if we reasonably believe your use of the app poses a risk to other users or to us.</p>
+    <p>You may delete your account at any time from the app settings. Deletion is subject to our data retention policy as set out in the <a href="/privacy">Privacy Policy</a>.</p>
+
+    <h2>15. Changes to these Terms</h2>
+    <p>We may update these Terms from time to time. We will notify you of material changes via the app or by email. Continued use of nudge after changes take effect constitutes acceptance of the updated Terms.</p>
+
+    <h2>16. Governing law</h2>
+    <p>These Terms are governed by the laws of England and Wales. Any disputes shall be subject to the exclusive jurisdiction of the courts of England and Wales.</p>
+
+    <h2>17. Contact</h2>
+    <div class="contact-box">
+      <p><strong>Motion Interactive Limited</strong></p>
+      <p><a href="mailto:team@nudgeme.live">team@nudgeme.live</a></p>
+      <p><a href="https://nudgeme.live">nudgeme.live</a></p>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="footer-links">
+      <a class="footer-link" href="/privacy">Privacy Policy</a>
+      <a class="footer-link" href="/terms">Terms of Service</a>
+    </div>
+    <p class="footer-copy">© 2025 Motion Interactive Limited. All rights reserved.</p>
+  </footer>
+</main>
+
+</body>
+</html>

@@ -184,6 +184,35 @@
       animation: fadeUp 0.7s 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
     }
 
+    .footer {
+      margin-top: 36px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      animation: fadeUp 0.7s 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+    .footer-email {
+      font-size: 13px;
+      color: var(--charcoal);
+      opacity: 0.45;
+      text-decoration: none;
+      transition: opacity 200ms ease;
+    }
+    .footer-email:hover { opacity: 0.75; }
+    .footer-links {
+      display: flex;
+      gap: 18px;
+    }
+    .footer-link {
+      font-size: 12px;
+      color: var(--cobalt);
+      opacity: 0.6;
+      text-decoration: none;
+      transition: opacity 200ms ease;
+    }
+    .footer-link:hover { opacity: 1; }
+
     .pins { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
     .pin { position: absolute; opacity: 0; animation: pinAppear 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
     .pin-1  { top: 12%; left: 8%;   animation-delay: 0.8s; }
@@ -258,22 +287,68 @@
 
     <p class="note">No spam, ever. Just a nudge when we're ready.</p>
 
+    <div class="footer">
+      <a class="footer-email" href="mailto:team@nudgeme.live">team@nudgeme.live</a>
+      <div class="footer-links">
+        <a class="footer-link" href="/privacy">Privacy Policy</a>
+        <a class="footer-link" href="/terms">Terms of Service</a>
+      </div>
+    </div>
+
   </div>
 </div>
 
 <script>
-  function handleSubmit() {
-    const email = document.getElementById('email').value;
+  const API_URL = 'https://api.nudgeme.live/api/regions/waitlist';
+
+  async function submitWaitlist(email, latitude, longitude) {
+    const res = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, latitude, longitude })
+    });
+    if (!res.ok) throw new Error('API error ' + res.status);
+  }
+
+  function getLocation() {
+    return new Promise(resolve => {
+      if (!navigator.geolocation) return resolve({ latitude: null, longitude: null });
+      navigator.geolocation.getCurrentPosition(
+        pos => resolve({ latitude: pos.coords.latitude, longitude: pos.coords.longitude }),
+        ()  => resolve({ latitude: null, longitude: null }),
+        { timeout: 5000 }
+      );
+    });
+  }
+
+  async function handleSubmit() {
+    const input = document.getElementById('email');
+    const email = input.value.trim();
+
     if (!email || !email.includes('@')) {
-      const input = document.getElementById('email');
       input.focus();
       input.style.borderColor = '#E55';
       setTimeout(() => input.style.borderColor = '', 1000);
       return;
     }
-    document.getElementById('form').style.display = 'none';
-    document.getElementById('success').classList.add('show');
+
+    const btn = document.querySelector('.btn');
+    btn.disabled = true;
+    btn.textContent = 'Saving…';
+
+    try {
+      const { latitude, longitude } = await getLocation();
+      await submitWaitlist(email, latitude, longitude);
+      document.getElementById('form').style.display = 'none';
+      document.getElementById('success').classList.add('show');
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = 'Notify me';
+      input.style.borderColor = '#E55';
+      setTimeout(() => input.style.borderColor = '', 1500);
+    }
   }
+
   document.getElementById('email').addEventListener('keydown', e => {
     if (e.key === 'Enter') handleSubmit();
   });

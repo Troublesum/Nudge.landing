@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Privacy Policy — nudge</title>
+  <meta name="description" content="Privacy Policy for the nudge app, operated by Motion Interactive Limited."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cobalt:      #2B5CE6;
+      --cobalt-soft: #6B96F5;
+      --cobalt-tint: #EDF0FA;
+      --bg:          #F6F8FF;
+      --charcoal:    #2D2D3A;
+      --amber:       #F5A623;
+      --border:      #DDE3F5;
+      --text-muted:  rgba(45,45,58,0.5);
+    }
+
+    html, body {
+      background: var(--bg);
+      color: var(--charcoal);
+      font-family: 'Inter', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.7;
+    }
+
+    /* ── Top nav ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(246,248,255,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    .nav-wordmark {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--cobalt);
+      letter-spacing: -0.03em;
+    }
+    .nav-back {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--cobalt);
+      text-decoration: none;
+      opacity: 0.7;
+      transition: opacity 200ms;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .nav-back:hover { opacity: 1; }
+
+    /* ── Page shell ── */
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 56px 24px 96px;
+    }
+
+    /* ── Header ── */
+    .doc-header {
+      margin-bottom: 48px;
+      padding-bottom: 32px;
+      border-bottom: 2px solid var(--cobalt-tint);
+    }
+    .doc-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--cobalt-tint);
+      color: var(--cobalt);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+    }
+    .doc-title {
+      font-size: clamp(28px, 4vw, 38px);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      color: var(--charcoal);
+      margin-bottom: 12px;
+    }
+    .doc-meta {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* ── Body content ── */
+    .doc-body h2 {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--charcoal);
+      margin: 48px 0 14px;
+      padding-top: 8px;
+    }
+    .doc-body h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin: 28px 0 10px;
+    }
+    .doc-body p {
+      font-size: 15px;
+      color: var(--charcoal);
+      opacity: 0.8;
+      margin-bottom: 14px;
+    }
+    .doc-body ul {
+      margin: 0 0 16px 0;
+      padding-left: 20px;
+    }
+    .doc-body li {
+      font-size: 15px;
+      color: var(--charcoal);
+      opacity: 0.8;
+      margin-bottom: 6px;
+    }
+    .doc-body a {
+      color: var(--cobalt);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(43,92,230,0.25);
+      transition: border-color 150ms;
+    }
+    .doc-body a:hover { border-color: var(--cobalt); }
+
+    /* Section divider */
+    .doc-body h2:not(:first-child) {
+      border-top: 1px solid var(--border);
+      padding-top: 40px;
+      margin-top: 40px;
+    }
+
+    /* ── Contact box ── */
+    .contact-box {
+      margin-top: 48px;
+      background: var(--cobalt-tint);
+      border-radius: 16px;
+      padding: 24px 28px;
+    }
+    .contact-box p {
+      font-size: 15px;
+      opacity: 0.85;
+      margin-bottom: 6px;
+    }
+    .contact-box p:last-child { margin-bottom: 0; }
+    .contact-box a {
+      color: var(--cobalt);
+      font-weight: 500;
+      text-decoration: none;
+    }
+    .contact-box a:hover { text-decoration: underline; }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      text-align: center;
+    }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+    .footer-link {
+      font-size: 13px;
+      color: var(--cobalt);
+      opacity: 0.6;
+      text-decoration: none;
+      transition: opacity 200ms;
+    }
+    .footer-link:hover { opacity: 1; }
+    .footer-copy {
+      font-size: 12px;
+      color: var(--charcoal);
+      opacity: 0.35;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="/">
+    <svg width="20" height="20" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M55.5 55.5 C55.5 55.5 42 49 39.5 42 C37.5 36.5 41.5 31 48 33 C54.5 35 57.5 41 55.5 55.5Z" fill="#2B5CE6"/>
+      <path opacity="0.8" d="M55 55 C55 55 48 41.5 50.5 34.5 C52.5 29 59 27 65.5 29 C72 31 75 36.5 73 42 C70.5 49 55 55 55 55Z" fill="#2B5CE6"/>
+    </svg>
+    <span class="nav-wordmark">nudge</span>
+  </a>
+  <a class="nav-back" href="/">
+    ← Back
+  </a>
+</nav>
+
+<main class="page">
+  <header class="doc-header">
+    <div class="doc-label">Legal</div>
+    <h1 class="doc-title">Privacy Policy</h1>
+    <p class="doc-meta">Effective date: 3 June 2025 · Motion Interactive Limited</p>
+  </header>
+
+  <div class="doc-body">
+
+    <p>Motion Interactive Limited ("we", "us", "our") operates the nudge mobile application and the website nudgeme.live. This Privacy Policy explains how we collect, use, store, and share your personal information when you use nudge, and your rights in relation to that information.</p>
+    <p>Please read this policy carefully before creating an account. By using nudge you agree to the practices described here.</p>
+
+    <h2>1. Who we are</h2>
+    <p>Motion Interactive Limited is the data controller for personal data processed through the nudge app. We are registered in England and Wales.</p>
+    <p>If you have any questions about this policy or how we handle your data, contact us at <a href="mailto:team@nudgeme.live">team@nudgeme.live</a>.</p>
+
+    <h2>2. What data we collect</h2>
+
+    <h3>2.1 Account data</h3>
+    <p>When you create an account we collect:</p>
+    <ul>
+      <li>Your display name and surname</li>
+      <li>Phone number (for SMS verification via Twilio)</li>
+      <li>Date of birth (to confirm you are 18 or over)</li>
+      <li>Profile photos (optional)</li>
+      <li>Interests and activities you select</li>
+      <li>Gender (optional)</li>
+      <li>Ethnicity (optional)</li>
+    </ul>
+
+    <h3>2.2 Identity verification data</h3>
+    <p>nudge uses identity verification for access to the nudge membership network. Verification is handled by Stripe Identity, a third-party service operated by Stripe, Inc. During verification you will be asked to submit:</p>
+    <ul>
+      <li>A government-issued photo ID (passport, driving licence, or national ID card)</li>
+      <li>A selfie image for liveness checking</li>
+    </ul>
+    <p>Stripe processes and stores this data under their own privacy policy. We receive only a verification result (verified / not verified) and a reference ID. We do not store your ID documents or biometric data on our servers.</p>
+    <p>Stripe Identity privacy policy: <a href="https://stripe.com/gb/privacy" target="_blank" rel="noopener">stripe.com/gb/privacy</a></p>
+
+    <h3>2.3 Location data</h3>
+    <p>nudge is a location-based app. With your permission we collect:</p>
+    <ul>
+      <li>Precise GPS location while the app is in use (foreground location)</li>
+      <li>Approximate background location when you enable map presence</li>
+    </ul>
+    <p>Location data is used to show your pin on the map, surface nearby events, and power the token (coin) collection mechanic. You can disable location sharing at any time in your device settings or within the app via Ghost Mode.</p>
+
+    <h3>2.4 Usage data</h3>
+    <p>We automatically collect certain technical data when you use the app:</p>
+    <ul>
+      <li>Device type, operating system, and app version</li>
+      <li>IP address</li>
+      <li>Actions taken in the app (events created, attended, tokens collected)</li>
+      <li>Crash reports and error logs</li>
+    </ul>
+
+    <h3>2.5 Payment data</h3>
+    <p>If you subscribe to nudge Plus or pay the one-time membership fee, payments are processed by Apple (App Store) or Google (Play Store) via RevenueCat. We do not store your card details. We receive a subscription status and transaction reference from RevenueCat.</p>
+    <p>RevenueCat privacy policy: <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener">revenuecat.com/privacy</a></p>
+
+    <h3>2.6 Communications</h3>
+    <p>If you message other users through the app, those messages are stored on our servers to enable delivery. We do not read private messages except where required to investigate a safety or legal matter.</p>
+
+    <h2>3. How we use your data</h2>
+    <p>We use your personal data to:</p>
+    <ul>
+      <li>Create and manage your account</li>
+      <li>Verify your identity via Stripe Identity</li>
+      <li>Show your location pin on the map to other verified users (subject to your visibility settings)</li>
+      <li>Match you with nearby events and users based on location and interests</li>
+      <li>Process subscription payments and manage your Plus entitlement</li>
+      <li>Send you push notifications about events, connections, and activity (you can opt out in settings)</li>
+      <li>Detect and prevent fraud, abuse, and safety incidents</li>
+      <li>Comply with legal obligations</li>
+      <li>Improve the app and fix technical issues</li>
+    </ul>
+
+    <h2>4. Legal basis for processing (UK GDPR)</h2>
+    <p>We rely on the following legal bases:</p>
+    <ul>
+      <li><strong>Contract</strong> — processing necessary to provide the nudge service you have signed up to</li>
+      <li><strong>Legitimate interests</strong> — improving the app, detecting abuse, and ensuring platform safety</li>
+      <li><strong>Legal obligation</strong> — where we are required to process data by law</li>
+      <li><strong>Consent</strong> — for optional features such as background location and marketing communications. You can withdraw consent at any time.</li>
+    </ul>
+
+    <h2>5. Who we share your data with</h2>
+    <p>We share personal data only where necessary:</p>
+    <ul>
+      <li>Stripe, Inc. — identity verification and payment infrastructure</li>
+      <li>Twilio, Inc. — SMS delivery for phone verification</li>
+      <li>RevenueCat, Inc. — subscription management</li>
+      <li>Microsoft Azure — cloud hosting and storage (servers located in the UK and EU)</li>
+      <li>Apple / Google — app distribution and in-app purchase processing</li>
+    </ul>
+    <p>We do not sell your personal data to third parties. We do not share your data with advertisers.</p>
+
+    <h2>6. How long we keep your data</h2>
+    <p>We retain your account data for as long as your account is active. If you delete your account:</p>
+    <ul>
+      <li>Your profile, location history, and messages are deleted within 30 days</li>
+      <li>Aggregated or anonymised analytics data may be retained indefinitely</li>
+      <li>We may retain data longer if required by law or to resolve a dispute</li>
+    </ul>
+
+    <h2>7. Your rights</h2>
+    <p>Under UK GDPR you have the right to:</p>
+    <ul>
+      <li>Access the personal data we hold about you</li>
+      <li>Correct inaccurate data</li>
+      <li>Request deletion of your data (right to erasure)</li>
+      <li>Restrict or object to certain processing</li>
+      <li>Receive your data in a portable format</li>
+      <li>Withdraw consent at any time (where processing is based on consent)</li>
+    </ul>
+    <p>To exercise any of these rights, contact us at <a href="mailto:team@nudgeme.live">team@nudgeme.live</a>. We will respond within one month.</p>
+    <p>You also have the right to lodge a complaint with the Information Commissioner's Office (ICO) at <a href="https://ico.org.uk" target="_blank" rel="noopener">ico.org.uk</a>.</p>
+
+    <h2>8. Children</h2>
+    <p>nudge is not intended for anyone under 18. We do not knowingly collect personal data from anyone under 18. If you believe a child has created an account, please contact us and we will delete it promptly.</p>
+
+    <h2>9. Security</h2>
+    <p>We use industry-standard security measures including HTTPS encryption in transit and encrypted storage at rest. Identity verification data is handled exclusively by Stripe and never passes through our servers. No method of transmission over the internet is 100% secure; we cannot guarantee absolute security.</p>
+
+    <h2>10. International transfers</h2>
+    <p>Some of our third-party providers (Stripe, Twilio, RevenueCat) are based in the United States. Where data is transferred outside the UK, we ensure appropriate safeguards are in place (such as UK adequacy decisions or Standard Contractual Clauses).</p>
+
+    <h2>11. Changes to this policy</h2>
+    <p>We may update this Privacy Policy from time to time. We will notify you of material changes via the app or by email. The effective date at the top of this document will always reflect the latest version.</p>
+
+    <h2>12. Contact</h2>
+    <div class="contact-box">
+      <p><strong>Motion Interactive Limited</strong></p>
+      <p><a href="mailto:team@nudgeme.live">team@nudgeme.live</a></p>
+      <p><a href="https://nudgeme.live">nudgeme.live</a></p>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="footer-links">
+      <a class="footer-link" href="/privacy">Privacy Policy</a>
+      <a class="footer-link" href="/terms">Terms of Service</a>
+    </div>
+    <p class="footer-copy">© 2025 Motion Interactive Limited. All rights reserved.</p>
+  </footer>
+</main>
+
+</body>
+</html>
