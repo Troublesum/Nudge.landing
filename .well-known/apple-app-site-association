@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["FV2JF2UGUP.app.nudge.mobile"],
+        "components": [
+          {
+            "/": "/event/*",
+            "comment": "Event detail / share links — opens app to /event/[eventId]"
+          }
+        ]
+      }
+    ]
+  }
+}

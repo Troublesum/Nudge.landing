@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.nudge.mobile",
+      "sha256_cert_fingerprints": [
+        "DE:B1:07:1E:E0:0D:D7:22:C8:42:44:59:26:FD:92:0D:50:62:06:02:C8:57:1C:55:09:4B:13:BE:8F:84:FE:68",
+        "D8:E6:D6:AD:64:CE:62:A8:08:EB:74:14:9A:27:7B:37:DA:96:1B:EA:22:3F:37:EF:2E:80:3E:17:15:C3:C2:19"
+      ]
+    }
+  }
+]
