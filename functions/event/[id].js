@@ -71,27 +71,41 @@ export async function onRequestGet(context) {
 
 function renderPage(event) {
   const hasEvent = !!event;
-  const name = hasEvent ? event.name : "You're invited to meet up";
+  const name = hasEvent ? event.name : "";
   const activity = hasEvent ? (event.activityPinName || event.activityName || "meet up") : "meet up";
   const when = hasEvent ? formatWhen(event.startsAt) : "";
-  const ended = hasEvent && event.hasEnded;
+  // State precedence: cancelled > ended > upcoming. A cancelled event that's
+  // also in the past still reads as "cancelled" (the more meaningful fact).
+  const cancelled = hasEvent && event.isCancelled;
+  const ended = hasEvent && !cancelled && event.hasEnded;
+  const upcoming = hasEvent && !cancelled && !ended;
 
   // Social-card copy. Warm, lowercase brand, no exclamation marks (CLAUDE.md).
-  const ogTitle = hasEvent ? `${name} · nudge` : "You're invited to meet up on nudge";
-  const ogDescription = hasEvent
-    ? (ended
-        ? `This ${activity.toLowerCase()} on nudge has ended. Get the app to find what's happening near you.`
-        : `${event.organiserFirstName || "Someone"} invited you to ${activity.toLowerCase()}${event.locationName ? ` at ${event.locationName}` : ""}${when ? ` — ${when}` : ""}. Get nudge to join.`)
-    : "A safe way to meet real, verified people nearby. Get nudge to see this event and join.";
-  const ogImage = (hasEvent && event.imageUrl) ? event.imageUrl : OG_FALLBACK_IMAGE;
-
-  // Human-facing card body.
-  const heading = ended ? "This event has ended" : (hasEvent ? "You're invited" : "You're invited to meet up");
-  const lead = hasEvent
-    ? (ended
-        ? `${escapeHtml(name)} has wrapped up. Get nudge to see what's happening near you and meet real, verified people.`
-        : `${escapeHtml(event.organiserFirstName || "Someone")} invited you to <strong>${escapeHtml(name)}</strong>${event.locationName ? ` at ${escapeHtml(event.locationName)}` : ""}${when ? `<br><span class="when">${escapeHtml(when)}</span>` : ""}. Get nudge to see it and join.`)
-    : "Someone shared an event with you on nudge — a safe way to meet real, verified people nearby. Get the app to see it and join.";
+  // event === null means the link is genuinely gone (invalid id, deleted,
+  // under review, or suspended organiser) — copy stays neutral, never "invited".
+  let ogTitle, ogDescription, heading, lead;
+  if (upcoming) {
+    ogTitle = `${name} · nudge`;
+    ogDescription = `${event.organiserFirstName || "Someone"} invited you to ${activity.toLowerCase()}${event.locationName ? ` at ${event.locationName}` : ""}${when ? ` — ${when}` : ""}. Get nudge to join.`;
+    heading = "You're invited";
+    lead = `${escapeHtml(event.organiserFirstName || "Someone")} invited you to <strong>${escapeHtml(name)}</strong>${event.locationName ? ` at ${escapeHtml(event.locationName)}` : ""}${when ? `<br><span class="when">${escapeHtml(when)}</span>` : ""}. Get nudge to see it and join.`;
+  } else if (cancelled) {
+    ogTitle = `${name} · nudge`;
+    ogDescription = `This event on nudge was cancelled. Get the app to find what's happening near you.`;
+    heading = "This event was cancelled";
+    lead = `<strong>${escapeHtml(name)}</strong> is no longer happening. Get nudge to see what else is going on near you and meet real, verified people.`;
+  } else if (ended) {
+    ogTitle = `${name} · nudge`;
+    ogDescription = `This ${activity.toLowerCase()} on nudge has ended. Get the app to find what's happening near you.`;
+    heading = "This event has ended";
+    lead = `<strong>${escapeHtml(name)}</strong> has wrapped up. Get nudge to see what's happening near you and meet real, verified people.`;
+  } else {
+    ogTitle = "nudge — meet real people nearby";
+    ogDescription = "A safe way to meet real, verified people nearby. Get nudge to see what's happening around you.";
+    heading = "This event isn't available";
+    lead = "This link may have expired or been removed. Get nudge to see what's happening near you and meet real, verified people.";
+  }
+  const ogImage = (hasEvent && event.imageUrl && upcoming) ? event.imageUrl : OG_FALLBACK_IMAGE;
 
   return `<!DOCTYPE html>
 <html lang="en">
