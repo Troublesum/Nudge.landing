@@ -1,24 +1,38 @@
-// Cloudflare Pages Function — GET /event/<id>
+// Cloudflare Worker (static-assets model) for the nudge landing site.
 //
-// Renders a per-event share page: an Open Graph card for social crawlers
-// (which DON'T run JavaScript, so the meta tags must be server-rendered here)
-// plus a store-bounce interstitial for humans without the app. People WITH the
-// app never reach this — the verified App/Universal Link opens the app first.
+// Cloudflare serves the static files (index.html, /privacy, /terms,
+// /.well-known/*, 404.html) directly from the assets bucket — this Worker only
+// runs for requests that DON'T match a static asset. We use it to render the
+// dynamic per-event share page at /event/<id>:
+//   - an Open Graph card for social crawlers (which don't run JS, so the meta
+//     tags must be server-rendered here), and
+//   - a store-bounce interstitial for humans without the app.
+// People WITH the app never reach this — the verified App/Universal Link opens
+// the app first.
 //
-// Data comes from the public, unauthenticated API:
+// Event data comes from the public, unauthenticated API:
 //   GET https://api.nudgeme.live/api/broadcast/<id>/share
 // which 404s for events that must not be previewed (deleted / under review /
-// cancelled / suspended organiser). On any miss we still render a friendly
-// generic "get nudge" page so the link never dead-ends.
-//
-// This file is ignored by GitHub Pages; it only runs once the repo is served
-// by Cloudflare Pages. Static assets (index.html, /.well-known, 404.html) are
-// still served directly from the repo.
+// suspended organiser) and flags cancelled/ended. Any miss still renders a
+// friendly generic page so the link never dead-ends.
 
 const API_BASE = "https://api.nudgeme.live/api";
 const APP_STORE_URL = "https://apps.apple.com/app/id6771520018";
 const PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=app.nudge.mobile";
 const OG_FALLBACK_IMAGE = "https://nudgeme.live/og-event.png";
+
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+    const match = url.pathname.match(/^\/event\/([^/]+)\/?$/);
+    if (request.method === "GET" && match) {
+      return renderEventPage(match[1]);
+    }
+    // Anything else (the static site, /.well-known, genuine 404s) is served
+    // from the assets bucket, which yields the branded 404.html on a miss.
+    return env.ASSETS.fetch(request);
+  },
+};
 
 function escapeHtml(value) {
   return String(value == null ? "" : value)
@@ -40,8 +54,7 @@ function formatWhen(iso) {
   }
 }
 
-export async function onRequestGet(context) {
-  const id = context.params.id;
+async function renderEventPage(id) {
   let event = null;
 
   if (/^[0-9a-fA-F-]{36}$/.test(id)) {

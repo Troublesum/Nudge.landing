@@ -1,0 +1,15 @@
+{
+  // Cloudflare Worker with static assets. Serves the landing site's static
+  // files from ./ and runs worker.js for non-asset routes (the /event/<id>
+  // share page). Deployed from Git via Cloudflare Workers Builds.
+  "name": "nudge",
+  "main": "worker.js",
+  "compatibility_date": "2024-11-01",
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS",
+    // Genuine misses (and non-event unmatched paths) fall back to the branded
+    // 404.html rather than a bare Cloudflare 404.
+    "not_found_handling": "404-page"
+  }
+}

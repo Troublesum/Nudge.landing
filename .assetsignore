@@ -1,0 +1,15 @@
+# Files in the repo root that must NOT be uploaded/served as static assets.
+# (The assets directory is ".", so without this the Worker source, config, and
+# docs would be downloadable at e.g. /worker.js.)
+worker.js
+wrangler.jsonc
+package.json
+package-lock.json
+node_modules
+.assetsignore
+.git
+SETUP-event-previews.md
+functions
+# GitHub Pages leftovers — no longer used now the site is on Cloudflare.
+CNAME
+.nojekyll
