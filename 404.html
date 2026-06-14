@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>nudge — you're invited</title>
+
+  <!-- Open Graph / social preview. NOTE: GitHub Pages serves this file with a
+       404 status for unmatched paths, and these tags are generic for every
+       event (no per-event title/image). True per-event previews need an edge
+       host + a public event-metadata API — see the landing repo notes. To make
+       even this generic card show an image, add a 1200x630 PNG at
+       https://nudgeme.live/og-event.png and the og:image tag will pick it up. -->
+  <meta property="og:site_name" content="nudge" />
+  <meta property="og:title" content="You're invited to meet up on nudge" />
+  <meta property="og:description" content="A safe way to meet real, verified people nearby. Get nudge to see this event and join." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nudgeme.live/og-event.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="You're invited to meet up on nudge" />
+  <meta name="twitter:description" content="A safe way to meet real, verified people nearby. Get nudge to see this event and join." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --primary: #2B5CE6;
+      --primary-light: #6B96F5;
+      --background: #F6F8FF;
+      --surface: #EDF0FA;
+      --text: #2D2D3A;
+    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--background);
+      color: var(--text);
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      line-height: 1.5;
+    }
+    .card {
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 40px 28px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+    }
+    .mark { margin: 0 auto 24px; display: block; }
+    h1 {
+      font-weight: 600;
+      font-size: 24px;
+      margin: 0 0 12px;
+      letter-spacing: -0.2px;
+    }
+    p.lead {
+      font-size: 15px;
+      margin: 0 auto 28px;
+      max-width: 320px;
+    }
+    .stores {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    a.btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 500;
+      font-size: 15px;
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 15px 24px;
+      transition: transform 0.12s ease-out, opacity 0.12s ease-out;
+    }
+    a.btn:active { transform: scale(0.97); }
+    a.btn.primary { background: var(--primary); color: #fff; }
+    a.btn.secondary { background: transparent; color: var(--primary); border: 1.5px solid var(--primary); }
+    /* Hide the non-detected platform's button by default; JS reveals the right set. */
+    .stores a.btn { display: none; }
+    body[data-os="ios"] a.btn[data-os="ios"],
+    body[data-os="android"] a.btn[data-os="android"],
+    body[data-os="other"] a.btn { display: inline-flex; }
+
+    .open-app {
+      font-size: 13px;
+      color: var(--primary);
+      text-decoration: none;
+      display: inline-block;
+      padding: 8px;
+    }
+    .tagline {
+      margin-top: 28px;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      color: var(--text);
+      opacity: 0.55;
+    }
+  </style>
+</head>
+<body data-os="other">
+  <main class="card">
+    <svg class="mark" width="44" height="61" viewBox="0 0 44 61" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M21.7554 29.9048C21.7554 29.9048 6.41851 36.8433 3.56584 43.8768C1.42634 49.152 4.60745 54.1737 11.0579 56.2805C17.5083 58.3874 23.5421 56.3756 25.6816 51.1004C28.5342 44.0669 21.7554 29.9048 21.7554 29.9048Z" fill="#2B5CE6"/>
+      <path opacity="0.85" d="M21.3185 30.2583C21.3185 30.2583 14.5396 16.0962 17.3923 9.06267C19.5318 3.78753 25.5655 1.77569 32.016 3.88257C38.4664 5.98946 41.6475 11.0111 39.508 16.2863C36.6553 23.3198 21.3185 30.2583 21.3185 30.2583Z" fill="#2B5CE6"/>
+    </svg>
+
+    <h1>You're invited to meet up</h1>
+    <p class="lead">Someone shared an event with you on nudge — a safe way to meet real, verified people nearby. Get the app to see it and join.</p>
+
+    <div class="stores">
+      <a class="btn primary" data-os="ios" href="https://apps.apple.com/app/id6771520018">Download on the App Store</a>
+      <a class="btn primary" data-os="android" href="https://play.google.com/store/apps/details?id=app.nudge.mobile">Get it on Google Play</a>
+      <!-- "other" (desktop) shows both -->
+      <a class="btn secondary" data-os="android" href="https://apps.apple.com/app/id6771520018">Download on the App Store</a>
+      <a class="btn secondary" data-os="ios" href="https://play.google.com/store/apps/details?id=app.nudge.mobile">Get it on Google Play</a>
+    </div>
+
+    <a class="open-app" id="open-app" href="#">Already have nudge? Open it</a>
+
+    <div class="tagline">nudge</div>
+  </main>
+
+  <script>
+    (function () {
+      // Detect platform to lead with the right store. iPadOS 13+ reports as Mac
+      // with touch, so fold that into "ios". Everything else (desktop) shows both.
+      var ua = navigator.userAgent || '';
+      var isIOS = /iPad|iPhone|iPod/.test(ua) ||
+        (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      var isAndroid = /android/i.test(ua);
+      document.body.setAttribute('data-os', isIOS ? 'ios' : isAndroid ? 'android' : 'other');
+
+      // The event id lives in the path (/event/<id>). Users with the app
+      // installed never reach this page — the OS opens the app via the verified
+      // App/Universal Link first. The "Open it" link is a best-effort fallback
+      // for when verification hasn't propagated yet: re-hit the same https URL
+      // (the OS may intercept it) so a returning user can still jump in.
+      var openApp = document.getElementById('open-app');
+      openApp.setAttribute('href', window.location.href);
+    })();
+  </script>
+</body>
+</html>
