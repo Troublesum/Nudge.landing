@@ -1,0 +1,12 @@
+# Cloudflare Pages headers. Ignored by GitHub Pages — only applied once this
+# repo is served by Cloudflare Pages.
+#
+# Apple requires the AASA file to be served as application/json. It has no file
+# extension, so static hosts default it to octet-stream; this forces the right
+# type. (GitHub Pages can't set this, which is why moving /event handling to
+# Cloudflare Pages also cleans up the iOS Universal Links content-type.)
+/.well-known/apple-app-site-association
+  Content-Type: application/json
+
+/.well-known/assetlinks.json
+  Content-Type: application/json
