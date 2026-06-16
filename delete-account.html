@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Delete your account — nudge</title>
+  <meta name="description" content="How to delete your nudge account and what data is removed. nudge is operated by Motion Interactive Limited."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cobalt:      #2B5CE6;
+      --cobalt-soft: #6B96F5;
+      --cobalt-tint: #EDF0FA;
+      --bg:          #F6F8FF;
+      --charcoal:    #2D2D3A;
+      --amber:       #F5A623;
+      --border:      #DDE3F5;
+      --text-muted:  rgba(45,45,58,0.5);
+    }
+
+    html, body {
+      background: var(--bg);
+      color: var(--charcoal);
+      font-family: 'Inter', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.7;
+    }
+
+    /* ── Top nav ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(246,248,255,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    .nav-wordmark {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--cobalt);
+      letter-spacing: -0.03em;
+    }
+    .nav-back {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--cobalt);
+      text-decoration: none;
+      opacity: 0.7;
+      transition: opacity 200ms;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .nav-back:hover { opacity: 1; }
+
+    /* ── Page shell ── */
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 56px 24px 96px;
+    }
+
+    /* ── Header ── */
+    .doc-header {
+      margin-bottom: 48px;
+      padding-bottom: 32px;
+      border-bottom: 2px solid var(--cobalt-tint);
+    }
+    .doc-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--cobalt-tint);
+      color: var(--cobalt);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+    }
+    .doc-title {
+      font-size: clamp(28px, 4vw, 38px);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      color: var(--charcoal);
+      margin-bottom: 12px;
+    }
+    .doc-meta {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* ── Body content ── */
+    .doc-body h2 {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--charcoal);
+      margin: 48px 0 14px;
+      padding-top: 8px;
+    }
+    .doc-body h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin: 28px 0 10px;
+    }
+    .doc-body p {
+      font-size: 15px;
+      color: var(--charcoal);
+      opacity: 0.8;
+      margin-bottom: 14px;
+    }
+    .doc-body ul, .doc-body ol {
+      margin: 0 0 16px 0;
+      padding-left: 20px;
+    }
+    .doc-body li {
+      font-size: 15px;
+      color: var(--charcoal);
+      opacity: 0.8;
+      margin-bottom: 6px;
+    }
+    .doc-body a {
+      color: var(--cobalt);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(43,92,230,0.25);
+      transition: border-color 150ms;
+    }
+    .doc-body a:hover { border-color: var(--cobalt); }
+
+    /* Section divider */
+    .doc-body h2:not(:first-child) {
+      border-top: 1px solid var(--border);
+      padding-top: 40px;
+      margin-top: 40px;
+    }
+
+    /* ── Steps callout ── */
+    .steps-box {
+      background: var(--cobalt-tint);
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin: 8px 0 16px;
+    }
+    .steps-box ol { margin: 0; padding-left: 20px; }
+    .steps-box li { opacity: 0.9; }
+
+    /* ── Contact box ── */
+    .contact-box {
+      margin-top: 48px;
+      background: var(--cobalt-tint);
+      border-radius: 16px;
+      padding: 24px 28px;
+    }
+    .contact-box p {
+      font-size: 15px;
+      opacity: 0.85;
+      margin-bottom: 6px;
+    }
+    .contact-box p:last-child { margin-bottom: 0; }
+    .contact-box a {
+      color: var(--cobalt);
+      font-weight: 500;
+      text-decoration: none;
+    }
+    .contact-box a:hover { text-decoration: underline; }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      text-align: center;
+    }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+    .footer-link {
+      font-size: 13px;
+      color: var(--cobalt);
+      opacity: 0.6;
+      text-decoration: none;
+      transition: opacity 200ms;
+    }
+    .footer-link:hover { opacity: 1; }
+    .footer-copy {
+      font-size: 12px;
+      color: var(--charcoal);
+      opacity: 0.35;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="/">
+    <svg width="20" height="20" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M55.5 55.5 C55.5 55.5 42 49 39.5 42 C37.5 36.5 41.5 31 48 33 C54.5 35 57.5 41 55.5 55.5Z" fill="#2B5CE6"/>
+      <path opacity="0.8" d="M55 55 C55 55 48 41.5 50.5 34.5 C52.5 29 59 27 65.5 29 C72 31 75 36.5 73 42 C70.5 49 55 55 55 55Z" fill="#2B5CE6"/>
+    </svg>
+    <span class="nav-wordmark">nudge</span>
+  </a>
+  <a class="nav-back" href="/">
+    ← Back
+  </a>
+</nav>
+
+<main class="page">
+  <header class="doc-header">
+    <div class="doc-label">Account deletion</div>
+    <h1 class="doc-title">Deleting your nudge account</h1>
+    <p class="doc-meta">Last updated: 16 June 2026 · Motion Interactive Limited</p>
+  </header>
+
+  <div class="doc-body">
+
+    <p>This page explains how to delete your account on <strong>nudge</strong> — the location-based app for meeting verified people nearby, operated by Motion Interactive Limited — and what happens to your data when you do.</p>
+
+    <h2>Delete your account in the app</h2>
+    <p>The fastest way to delete your account is from within the app. It is immediate and permanent — no waiting period.</p>
+    <div class="steps-box">
+      <ol>
+        <li>Open the <strong>nudge</strong> app and make sure you're signed in.</li>
+        <li>Go to the <strong>Profile</strong> tab.</li>
+        <li>Open the <strong>menu</strong> (the ⋯ / settings control) and choose <strong>Delete account</strong>.</li>
+        <li>Read the warning and <strong>confirm</strong>. Your account and personal data are deleted straight away.</li>
+      </ol>
+    </div>
+
+    <h2>Request deletion without the app</h2>
+    <p>If you've uninstalled nudge or can't sign in, you can ask us to delete your account by email:</p>
+    <ul>
+      <li>Email <a href="mailto:support@nudgeme.live?subject=Delete%20my%20nudge%20account">support@nudgeme.live</a> with the subject <em>"Delete my nudge account"</em>.</li>
+      <li>So we can locate and verify your account, include the <strong>phone number</strong> you registered with.</li>
+      <li>We'll verify that you own the account and complete the deletion <strong>within 30 days</strong>, then confirm by reply.</li>
+    </ul>
+
+    <h2>What data is deleted</h2>
+    <p>When your account is deleted, we permanently remove the personal information and content associated with it, including:</p>
+    <ul>
+      <li>Your profile — name, bio, gender, ethnicity, age and status</li>
+      <li>Your phone number and email address</li>
+      <li>Your profile photos (and the underlying image files)</li>
+      <li>Your location data and map presence</li>
+      <li>Your private messages and nudges (connection requests)</li>
+      <li>Your interests, collectables, coins and personalisation</li>
+      <li>Your identity-verification status and any verification reference we hold</li>
+      <li>Your notifications and push-notification registrations</li>
+      <li>Your nudge Plus subscription record on our systems</li>
+    </ul>
+
+    <h2>What is kept, and why</h2>
+    <p>A small amount of information is retained so that other people's experience and our legal obligations aren't broken:</p>
+    <ul>
+      <li><strong>Events you organised</strong> remain visible to the people who joined them, but are no longer linked to you — they're shown as organised by "Deleted user", with no personal identifiers attached. Any future events you'd scheduled are cancelled first.</li>
+      <li><strong>Minimal records</strong> may be kept where we're required to for legal, security, or fraud- and abuse-prevention purposes, or to resolve a dispute.</li>
+      <li><strong>Purchase records</strong> held by Apple (App Store) or Google (Play Store) are controlled by them under their own policies — manage or request deletion of those through your Apple or Google account.</li>
+    </ul>
+
+    <h2>Timing</h2>
+    <p>Deletion from within the app is <strong>immediate</strong>. Requests made by email are completed <strong>within 30 days</strong> of us verifying that you own the account. Residual copies in encrypted backups are removed on our normal backup-rotation cycle.</p>
+
+    <h2>Contact</h2>
+    <div class="contact-box">
+      <p><strong>Motion Interactive Limited</strong></p>
+      <p><a href="mailto:support@nudgeme.live">support@nudgeme.live</a></p>
+      <p><a href="https://nudgeme.live">nudgeme.live</a></p>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="footer-links">
+      <a class="footer-link" href="/privacy">Privacy Policy</a>
+      <a class="footer-link" href="/terms">Terms of Service</a>
+    </div>
+    <p class="footer-copy">© 2025 Motion Interactive Limited. All rights reserved.</p>
+  </footer>
+</main>
+
+</body>
+</html>
